@@ -1,0 +1,32 @@
+@startuml
+left to right direction
+
+:Operador Mantenimiento: as m
+
+(Registrar ingreso mantenimiento) as ( UC1 )
+(registrar salida mantenimiento) as ( UC2 )
+(obtener historial mantenimientos) as ( UC3 )
+(seguimiento de mantenimientos) as ( UC4 )
+(asignar stock de repuestos a proceso de mantenimieno) as ( UC5 )
+(acceder historial de reparaciones por modelo) as ( UC6 )
+(informar no disponibilidad de vehiculo) as ( UC7 )
+(registrar detalles en el historial) as ( UC8 )
+(informar disponibilidad) as ( UC9 )
+(validar disponibilidad de stock) as ( UC10 )
+
+m --> ( UC1 )
+m --> ( UC2 )
+m --> ( UC3 )
+m --> ( UC4 )
+m --> ( UC5 )
+m --> ( UC6 )
+( UC1 ) --> ( UC7 )
+( UC2 ) --> ( UC8 )
+( UC2 ) --> ( UC9 )
+( UC5 ) <-- ( UC10 )
+
+
+
+
+
+@enduml
