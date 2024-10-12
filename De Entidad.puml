@@ -1,0 +1,96 @@
+@startuml
+
+class Vehiculo {
+  + Int id_vehiculo
+  + ModeloVehiculo modelo
+  + String matricula
+  + Sede asignado_a_sede
+  + Int id_traccar note: nuevo
+  + Enum EstadoVehiculo
+}
+
+enum EstadoVehiculo {
+  ACTIVO
+  EN_MANTENIMIENTO
+  BAJA
+}
+
+class Sede {
+  + Int id_sede
+  + String nombre_sede
+  + Strind direccion_sede
+  + double latitude_sede
+  + double longitude_sede
+}
+
+Vehiculo --o Sede: Tiene asignados
+ModeloVehiculo "n" <-- "1" MarcaVehiculo
+Vehiculo "n" <-- "1" ModeloVehiculo
+
+
+
+class MarcaVehiculo {
+  + Int id_marca_vehiculo
+  + String nombre_marca
+  + Image logo
+}
+
+class ModeloVehiculo {
+  + Int id_modelo_vehiculo
+  + Int id_marca_vehiculo
+  + String nombre_modelo
+}
+
+
+Mantenimiento "n" <-- "1" Vehiculo: Recibe
+Mantenimiento <-- EstadoMantenimiento
+Mantenimiento <-- TipoMantenimiento
+Mantenimiento "n" o-- "m" Repuesto
+
+
+class Mantenimiento {
+  + Int id_mantenimiento
+  + Int id_vehiculo
+  + Date fecha_inicio
+  + Date fecha_fin note: Nuevo
+  + Enum TipoMantenimiento
+  + Enum EstadoMantenimiento
+  + String descripcion 
+}
+
+class Seguimiento {
+  + Int id_seguimiento
+  + Int id_mantenimiento
+  + Date fecha_seguimiento
+  + String contenido
+}
+
+class Repuesto {
+  + Int id_repuesto
+  + String nombre_repuesto
+  + ModeloVehiculo id_modelo_vehiculo
+  + Int Stock
+  + Int umbral_minimo_stock
+}
+
+note left of Repuesto: Falta relacionar con bitacora de movimiento, \ncon proveedor que lo vende, \ncon precio de compra
+
+
+ModeloVehiculo <-- Repuesto: Corresponde
+
+
+Mantenimiento o-- Seguimiento
+
+enum EstadoMantenimiento {
+  ABIERTO
+  CERRADO_RESUELTO
+  CERRADO_IMPOSIBLE_REPARAR
+  EN_TALLER_EXTERNO
+}
+
+enum TipoMantenimiento {
+  PREVENTIVO
+  CORRECTIVO
+  DAÑO
+}
+@enduml

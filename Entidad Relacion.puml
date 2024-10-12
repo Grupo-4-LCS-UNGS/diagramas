@@ -1,0 +1,86 @@
+@startuml
+
+entity Vehiculo {
+  + id_vehiculo : Int
+  + modelo : ModeloVehiculo
+  + matricula : String
+  + asignado_a_sede : Sede
+  + id_traccar : Int
+  + estado : EstadoVehiculo
+}
+
+entity Sede {
+  + id_sede : Int
+  + nombre_sede : String
+  + direccion_sede : String
+  + latitude_sede : double
+  + longitude_sede : double
+}
+
+entity MarcaVehiculo {
+  + id_marca_vehiculo : Int
+  + nombre_marca : String
+  + logo : Image
+}
+
+entity ModeloVehiculo {
+  + id_modelo_vehiculo : Int
+  + id_marca_vehiculo : Int
+  + nombre_modelo : String
+}
+
+entity Mantenimiento {
+  + id_mantenimiento : Int
+  + id_vehiculo : Int
+  + fecha_inicio : Date
+  + fecha_fin : Date
+  + tipo : TipoMantenimiento
+  + estado : EstadoMantenimiento
+  + descripcion : String
+}
+
+entity Seguimiento {
+  + id_seguimiento : Int
+  + id_mantenimiento : Int
+  + fecha_seguimiento : Date
+  + contenido : String
+}
+
+entity Repuesto {
+  + id_repuesto : Int
+  + nombre_repuesto : String
+  + id_modelo_vehiculo : ModeloVehiculo
+  + Stock : Int
+  + umbral_minimo_stock : Int
+}
+
+enum EstadoVehiculo {
+  ACTIVO
+  EN_MANTENIMIENTO
+  BAJA
+}
+
+enum EstadoMantenimiento {
+  ABIERTO
+  CERRADO_RESUELTO
+  CERRADO_IMPOSIBLE_REPARAR
+  EN_TALLER_EXTERNO
+}
+
+enum TipoMantenimiento {
+  PREVENTIVO
+  CORRECTIVO
+  DAÑO
+}
+
+Vehiculo } |--o| { Sede : "Tiene asignados"
+ModeloVehiculo ||--o{ Vehiculo : "n: 1"
+ModeloVehiculo ||--o{ MarcaVehiculo : "1: n"
+Mantenimiento ||--o{ Vehiculo : "1: n"
+Mantenimiento }o--|| Seguimiento 
+Mantenimiento }o--|{ Repuesto : "m: n"
+Repuesto |o--|{ ModeloVehiculo : "Corresponde"
+Mantenimiento |o--|| EstadoMantenimiento
+Mantenimiento |o--|| TipoMantenimiento
+
+@enduml
