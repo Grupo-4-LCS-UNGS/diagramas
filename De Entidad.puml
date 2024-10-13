@@ -4,15 +4,18 @@ class Vehiculo {
   + Int id_vehiculo
   + ModeloVehiculo modelo
   + String matricula
-  + Sede asignado_a_sede
   + Int id_traccar note: nuevo
   + Enum EstadoVehiculo
+  + crear(): Vehiculo
+
 }
 
 enum EstadoVehiculo {
   ACTIVO
   EN_MANTENIMIENTO
-  BAJA
+  BAJA_TEMPORAL
+  BAJA_DEFINITIVA
+
 }
 
 class Sede {
@@ -23,10 +26,13 @@ class Sede {
   + double longitude_sede
 }
 
+note bottom of  Sede: Tal vez no convenga complejizar tanto el negocio, \ny que sea una sola gestión sin importan dónde 
+
+
 Vehiculo --o Sede: Tiene asignados
 ModeloVehiculo "n" <-- "1" MarcaVehiculo
 Vehiculo "n" <-- "1" ModeloVehiculo
-
+Vehiculo <-- EstadoVehiculo
 
 
 class MarcaVehiculo {
@@ -44,7 +50,6 @@ class ModeloVehiculo {
 
 Mantenimiento "n" <-- "1" Vehiculo: Recibe
 Mantenimiento <-- EstadoMantenimiento
-Mantenimiento <-- TipoMantenimiento
 Mantenimiento "n" o-- "m" Repuesto
 
 
@@ -52,18 +57,12 @@ class Mantenimiento {
   + Int id_mantenimiento
   + Int id_vehiculo
   + Date fecha_inicio
-  + Date fecha_fin note: Nuevo
-  + Enum TipoMantenimiento
+  + Date fecha_fin
   + Enum EstadoMantenimiento
   + String descripcion 
 }
 
-class Seguimiento {
-  + Int id_seguimiento
-  + Int id_mantenimiento
-  + Date fecha_seguimiento
-  + String contenido
-}
+
 
 class Repuesto {
   + Int id_repuesto
@@ -75,22 +74,15 @@ class Repuesto {
 
 note left of Repuesto: Falta relacionar con bitacora de movimiento, \ncon proveedor que lo vende, \ncon precio de compra
 
-
 ModeloVehiculo <-- Repuesto: Corresponde
 
 
-Mantenimiento o-- Seguimiento
 
 enum EstadoMantenimiento {
   ABIERTO
   CERRADO_RESUELTO
   CERRADO_IMPOSIBLE_REPARAR
-  EN_TALLER_EXTERNO
 }
 
-enum TipoMantenimiento {
-  PREVENTIVO
-  CORRECTIVO
-  DAÑO
-}
+
 @enduml
