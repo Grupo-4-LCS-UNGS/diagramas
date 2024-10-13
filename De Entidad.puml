@@ -4,10 +4,24 @@ class Vehiculo {
   + Int id_vehiculo
   + ModeloVehiculo modelo
   + String matricula
+  + Int anio
+  + Int kilometraje
+  + Enum TipoCombustible
   + Int id_traccar note: nuevo
   + Enum EstadoVehiculo
+  + File documentacion
   + crear(): Vehiculo
+  + modificarEstado(EstadoVehiculo):void
 
+}
+
+TipoCombustible -- Vehiculo
+
+enum TipoCombustible {
+  GASOLINA
+  DIESEL
+  ELECTRICO
+  HIBRIDO
 }
 
 enum EstadoVehiculo {
@@ -15,7 +29,6 @@ enum EstadoVehiculo {
   EN_MANTENIMIENTO
   BAJA_TEMPORAL
   BAJA_DEFINITIVA
-
 }
 
 class Sede {
@@ -29,7 +42,6 @@ class Sede {
 note bottom of  Sede: Tal vez no convenga complejizar tanto el negocio, \ny que sea una sola gestión sin importan dónde 
 
 
-Vehiculo --o Sede: Tiene asignados
 ModeloVehiculo "n" <-- "1" MarcaVehiculo
 Vehiculo "n" <-- "1" ModeloVehiculo
 Vehiculo <-- EstadoVehiculo
