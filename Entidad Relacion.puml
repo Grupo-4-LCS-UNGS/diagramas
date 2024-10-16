@@ -73,7 +73,6 @@ enum TipoMantenimiento {
   DAÑO
 }
 
-Vehiculo } |--o| { Sede : "Tiene asignados"
 ModeloVehiculo ||--o{ Vehiculo : "n: 1"
 ModeloVehiculo ||--o{ MarcaVehiculo : "1: n"
 Mantenimiento ||--o{ Vehiculo : "1: n"
