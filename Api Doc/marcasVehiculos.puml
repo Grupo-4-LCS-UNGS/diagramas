@@ -1,0 +1,15 @@
+@startuml
+entity "ModeloVehiculo" {
+  +id: int
+  +nombre: string
+  +id_marca_vehiculo: int
+}
+
+entity "MarcaVehiculo" {
+  +id: int
+  +nombre: string
+  +logo: string
+}
+
+ModeloVehiculo }-- MarcaVehiculo : marca
+@enduml

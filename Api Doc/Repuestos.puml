@@ -1,0 +1,29 @@
+@startuml
+class AsignacionRepuestos {
+    +id_mantenimiento: int
+    +id_repuesto: int
+}
+
+class Repuesto {
+    +id: int
+    +id_proveedor: int
+    +id_modelo_vehiculo: int
+    +nombre: str
+    +stock: int
+    +umbral_minimo: int
+}
+
+class Proveedor {
+    +id: int
+    +nombre: str
+}
+
+class ModeloVehiculo {
+    +id: int
+    +nombre: str
+}
+
+AsignacionRepuestos --> Repuesto : id_repuesto
+Repuesto --> Proveedor : id_proveedor
+Repuesto --> ModeloVehiculo : id_modelo_vehiculo
+@enduml

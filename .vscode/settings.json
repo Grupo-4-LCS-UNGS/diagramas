@@ -1,0 +1,6 @@
+{
+    "plantuml.render": "PlantUMLServer",
+    "plantuml.server": "https://uml.potus.ar",
+    "markdown.plantuml.server": "https://uml.potus.ar/svg",
+    "markdown-pdf.plantumlServer": "https://uml.potus.ar"
+}

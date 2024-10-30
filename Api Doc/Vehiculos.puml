@@ -1,0 +1,16 @@
+@startuml
+entity "Vehiculo" {
+  +id: int
+  +id_modelo: int
+  +matricula: string
+  +id_traccar: int
+  +estado: string
+}
+
+entity "ModeloVehiculo" {
+  +id: int
+  +nombre_modelo: string
+}
+
+Vehiculo }-- ModeloVehiculo : modelo
+@enduml
